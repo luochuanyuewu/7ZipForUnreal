@@ -20,15 +20,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static void Test();
 
-	UFUNCTION(BlueprintCallable, Category = SevenZip)
-		static bool Unzip(const FString& ArchivePath);
 
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
-		static bool UnzipWithPwd(const FString& ArchivePath, const FString& Password);
+		static bool Extract(const FString& ArchivePath,const FString& DistPath);
 
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
-		static bool UnzipTo(const FString& ArchivePath,const FString& DistPath);
-
-	UFUNCTION(BlueprintCallable, Category = SevenZip)
-		static bool UnzipToWithPwd(const FString& ArchivePath, const FString& DistPath ,const FString& Password);
+		static bool ExtractWithPwd(const FString& ArchivePath, const FString& DistPath ,const FString& Password);
+	//
+	//UFUNCTION(BlueprintCallable, Category = SevenZip)
+	//	static bool Extract(const FString& ArchivePath, );
 };

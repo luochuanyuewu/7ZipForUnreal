@@ -78,34 +78,31 @@ void USevenZipFunctionLibrary::Test()
 {
 }
 
-bool USevenZipFunctionLibrary::Unzip(const FString& ArchivePath)
+bool USevenZipFunctionLibrary::Extract(const FString& ArchivePath, const FString& DistPath)
 {
-	FString directory;
-	FString fileName;
+	if (ArchivePath.IsEmpty())
+	{
+		return false;
+	}
+
+	FString t_dir;
+	FString t_name;
 
 	//Check directory validity
-	if (!IsValidDirectory(directory, fileName, ArchivePath))
+	if (!IsValidDirectory(t_dir, t_name, ArchivePath))
 		return false;
 
-	return UnzipTo(ArchivePath, directory);
-}
-
-bool USevenZipFunctionLibrary::UnzipWithPwd(const FString& ArchivePath, const FString& Password)
-{
-	FString directory;
-	FString fileName;
-
-	//Check directory validity
-	if (!IsValidDirectory(directory, fileName, ArchivePath))
-		return false;
-
-	return UnzipToWithPwd(ArchivePath, directory,Password);
-}
-
-bool USevenZipFunctionLibrary::UnzipTo(const FString& ArchivePath, const FString& DistPath)
-{
 	wstring t_archivePath = StringToWString(TCHAR_TO_UTF8(*ArchivePath));
-	wstring t_distPath = StringToWString(TCHAR_TO_UTF8(*DistPath));
+	wstring t_distPath;
+
+	if (DistPath.IsEmpty())
+	{
+		t_distPath = StringToWString(TCHAR_TO_UTF8(*t_dir));
+	}
+	else
+	{
+		t_distPath = StringToWString(TCHAR_TO_UTF8(*DistPath));
+	}
 
 	BitExtractor extractor(*SZLib, BitFormat::Zip);
 	extractor.extract(t_archivePath,t_distPath);
@@ -113,17 +110,39 @@ bool USevenZipFunctionLibrary::UnzipTo(const FString& ArchivePath, const FString
 
 }
 
-bool USevenZipFunctionLibrary::UnzipToWithPwd(const FString& ArchivePath, const FString& DistPath, const FString& Password)
+bool USevenZipFunctionLibrary::ExtractWithPwd(const FString& ArchivePath, const FString& DistPath, const FString& Password)
 {
-	wstring t_archivePath = StringToWString(TCHAR_TO_UTF8(*ArchivePath));
-	wstring t_distPath = StringToWString(TCHAR_TO_UTF8(*DistPath));
-	wstring t_pwd = StringToWString(TCHAR_TO_UTF8(*Password));
-	BitExtractor extractor(*SZLib, BitFormat::Zip);
+	if (ArchivePath.IsEmpty() || Password.IsEmpty())
+	{
+		return false;
+	}
 	
-	extractor.setPassword(t_pwd);
-	
-	extractor.extract(t_archivePath, t_distPath);
+	FString t_dir;
+	FString t_name;
 
+	//Check directory validity
+	if (!IsValidDirectory(t_dir, t_name, ArchivePath))
+		return false;
+
+	wstring t_archivePath = StringToWString(TCHAR_TO_UTF8(*ArchivePath));
+	wstring t_distPath;
+	wstring t_pwd = StringToWString(TCHAR_TO_UTF8(*Password));
+
+	//detect dispath.
+	if (DistPath.IsEmpty())
+	{
+		t_distPath = StringToWString(TCHAR_TO_UTF8(*t_dir));
+	}
+	else
+	{
+		t_distPath = StringToWString(TCHAR_TO_UTF8(*DistPath));
+	}
+
+	BitExtractor extractor(*SZLib, BitFormat::Zip);
+
+	extractor.setPassword(t_pwd);
+
+	extractor.extract(t_archivePath, t_distPath);
 
 	return true;
 }
