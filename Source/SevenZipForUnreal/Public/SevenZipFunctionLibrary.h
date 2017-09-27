@@ -26,7 +26,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static bool ExtractWithPwd(const FString& ArchivePath, const FString& DistPath ,const FString& Password);
-	//
-	//UFUNCTION(BlueprintCallable, Category = SevenZip)
-	//	static bool Extract(const FString& ArchivePath, );
+	
+	UFUNCTION(BlueprintCallable, Category = SevenZip)
+		static bool ExtractAsBuffer(const FString& ArchivePath, TArray<uint8>& OutBuffer, int32 Index=0);
+	UFUNCTION(BlueprintCallable, Category = SevenZip)
+		static bool ExtractAsBufferWihtPwd(const FString& ArchivePath, TArray<uint8>& OutBuffer, const FString& Password, int32 Index = 0);
 };
