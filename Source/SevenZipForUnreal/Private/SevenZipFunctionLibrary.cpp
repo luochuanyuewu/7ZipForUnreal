@@ -105,7 +105,7 @@ FString USevenZipFunctionLibrary::GetGameDir()
 	return FPaths::GameDir();
 }
 
-FString USevenZipFunctionLibrary::GetConentDir()
+FString USevenZipFunctionLibrary::GetContentDir()
 {
 	return FPaths::GameContentDir();
 }

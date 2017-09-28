@@ -21,7 +21,7 @@ public:
 		static FString GetGameDir();
 
 	UFUNCTION(BlueprintPure, Category = SevenZip)
-		static FString GetConentDir();
+		static FString GetContentDir();
 
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static bool Extract(const FString& ArchivePath,const FString& DistPath);
