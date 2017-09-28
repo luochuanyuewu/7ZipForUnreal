@@ -18,8 +18,10 @@ class SEVENZIPFORUNREAL_API USevenZipFunctionLibrary : public UBlueprintFunction
 public:
 	~USevenZipFunctionLibrary();
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
-		static void Test();
+		static FString GetGameDir();
 
+	UFUNCTION(BlueprintCallable, Category = SevenZip)
+		static FString GetConentDir();
 
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static bool Extract(const FString& ArchivePath,const FString& DistPath);
@@ -29,6 +31,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static bool ExtractAsBuffer(const FString& ArchivePath, TArray<uint8>& OutBuffer, int32 Index=0);
+
 	UFUNCTION(BlueprintCallable, Category = SevenZip)
 		static bool ExtractAsBufferWihtPwd(const FString& ArchivePath, TArray<uint8>& OutBuffer, const FString& Password, int32 Index = 0);
 };

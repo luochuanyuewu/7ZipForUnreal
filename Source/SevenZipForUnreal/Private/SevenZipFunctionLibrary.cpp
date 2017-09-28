@@ -100,8 +100,14 @@ USevenZipFunctionLibrary::~USevenZipFunctionLibrary()
 	SZLib = nullptr;
 }
 
-void USevenZipFunctionLibrary::Test()
+FString USevenZipFunctionLibrary::GetGameDir()
 {
+	return FPaths::GameDir();
+}
+
+FString USevenZipFunctionLibrary::GetConentDir()
+{
+	return FPaths::GameContentDir();
 }
 
 bool USevenZipFunctionLibrary::Extract(const FString& ArchivePath, const FString& DistPath)
