@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "SevenZipFunctionLibrary.h"
-#include "Core.h"
-#include "IPluginManager.h"
+#include "Runtime/Projects/Public/Interfaces/IPluginManager.h"
 #include "bit7z.hpp"
+#include "Paths.h"
+
 using namespace bit7z;
 using namespace BitFormat;
-
 namespace {
 	//Private static vars
 	Bit7zLibrary* SZLib = nullptr;
@@ -100,14 +100,14 @@ USevenZipFunctionLibrary::~USevenZipFunctionLibrary()
 	SZLib = nullptr;
 }
 
-FString USevenZipFunctionLibrary::GetGameDir()
+FString USevenZipFunctionLibrary::GetProjectDir()
 {
-	return FPaths::GameDir();
+	return FPaths::ProjectDir();
 }
 
 FString USevenZipFunctionLibrary::GetContentDir()
 {
-	return FPaths::GameContentDir();
+	return FPaths::ProjectContentDir();
 }
 
 bool USevenZipFunctionLibrary::Extract(const FString& ArchivePath, const FString& DistPath)

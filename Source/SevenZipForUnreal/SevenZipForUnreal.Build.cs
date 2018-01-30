@@ -8,7 +8,7 @@ public class SevenZipForUnreal : ModuleRules
 	public SevenZipForUnreal(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
+
 		PublicIncludePaths.AddRange(
 			new string[] {
 				"SevenZipForUnreal/Public"

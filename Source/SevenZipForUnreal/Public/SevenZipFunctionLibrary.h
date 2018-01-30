@@ -18,7 +18,7 @@ class SEVENZIPFORUNREAL_API USevenZipFunctionLibrary : public UBlueprintFunction
 public:
 	~USevenZipFunctionLibrary();
 	UFUNCTION(BlueprintPure, Category = SevenZip)
-		static FString GetGameDir();
+		static FString GetProjectDir();
 
 	UFUNCTION(BlueprintPure, Category = SevenZip)
 		static FString GetContentDir();
