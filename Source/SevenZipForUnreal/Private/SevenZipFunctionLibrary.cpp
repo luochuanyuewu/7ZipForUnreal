@@ -100,15 +100,7 @@ USevenZipFunctionLibrary::~USevenZipFunctionLibrary()
 	SZLib = nullptr;
 }
 
-FString USevenZipFunctionLibrary::GetProjectDir()
-{
-	return FPaths::ProjectDir();
-}
 
-FString USevenZipFunctionLibrary::GetContentDir()
-{
-	return FPaths::ProjectContentDir();
-}
 
 bool USevenZipFunctionLibrary::Extract(const FString& ArchivePath, const FString& DistPath)
 {
